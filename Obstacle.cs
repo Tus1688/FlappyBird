@@ -1,0 +1,5 @@
+namespace Superbird;
+
+class Obstacle
+{
+}
