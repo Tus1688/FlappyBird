@@ -6,7 +6,8 @@ class Program
     {
         Menu menu = new Menu();
 
-        while(menu.option != MenuOption.Quit) {
+        while (menu.option != MenuOption.Quit)
+        {
             menu.SpawnMenu();
         }
     }
