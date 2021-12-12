@@ -15,13 +15,13 @@ class Game
      * @upwardSpeed = jump range of bird     << maybe upward should be twice as much as fall >>
      * @fallSpeed = fall range of bird
      * @wing = while bird is going up wing should be "V", whereas fall supposed to be "^"
-     * @eye = if bird died, it eye should be "X", in contrast "O"
+     * @eye = if bird died, it's eye should be "X", in contrast "O"
      */
 
     int score, pivotX, pivotY, height, width, fallDelay, wingDelay, upwardSpeed, fallSpeed;
-    int[,] birdX = new int[5,5];
-    int[,] birdY = new int[5,5];
-    char[,] bird = new char[5,5];
+    int[,] birdX = new int[5, 5];
+    int[,] birdY = new int[5, 5];
+    char[,] bird = new char[5, 5];
     char wing;
 
     /*
@@ -42,5 +42,42 @@ class Game
     int splitStart2, splitLength2, pipePivotX2;
 
     int pipeWidth, extraRender;  // extrarender prevent jitter from pipe gone away
+    bool restart, isFlying, gameOver;
 
+    Menu menu = new Menu();
+
+    private void CountDown()
+    {
+        Console.ForegroundColor = ConsoleColor.Gray;
+        for (int i = 3; i >= 1; i--)
+        {
+            Console.Write($"Game will start in {i}");
+            Thread.Sleep(1000);
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
+    }
+
+    private void Pause()
+    {
+        menu.Pause();
+        while (true)
+        {
+            cki = Console.ReadKey(true);
+            if (cki.Key == ConsoleKey.Spacebar)
+            {
+                // render game again
+                CountDown();
+            }
+            else if (cki.Key == ConsoleKey.R)
+            {
+                restart = true;
+                break;
+            }
+            else if (cki.Key == ConsoleKey.Q)
+            {
+                menu.SpawnMenu();
+                break;
+            }
+        }
+    }
 }
