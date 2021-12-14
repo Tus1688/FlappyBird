@@ -90,4 +90,19 @@ class Menu
         Console.WriteLine("      Main menu     - press [Q]             ");
         Console.WriteLine("    ====================================    ");
     }
+
+    public void Lose(int score, int highScore) 
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine();
+        Console.WriteLine("    ====================================    ");
+        Console.WriteLine("                  GAME OVER                 ");
+        Console.WriteLine();
+        Console.WriteLine("               Your Score: {0}              ", score);
+        Console.WriteLine("               High Score: {0}              ", highScore);
+        Console.WriteLine();
+        Console.WriteLine("         Restart game   - press [R]          ");
+        Console.WriteLine("         Main menu      - press [Q]          ");
+        Console.WriteLine("    ====================================    ");
+    }
 }

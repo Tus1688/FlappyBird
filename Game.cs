@@ -18,7 +18,7 @@ class Game
      * @eye = if bird died, it's eye should be "X", in contrast "O"
      */
 
-    int score, pivotX, pivotY, height, width, fallDelay, wingDelay, upwardSpeed, fallSpeed;
+    int score, pivotX, pivotY, height, width, fallDelay, wingDelay, upwardSpeed, fallSpeed, highScore;
     int[,] birdX = new int[5, 5];
     int[,] birdY = new int[5, 5];
     char[,] bird = new char[5, 5];
@@ -69,6 +69,25 @@ class Game
                 CountDown();
             }
             else if (cki.Key == ConsoleKey.R)
+            {
+                restart = true;
+                break;
+            }
+            else if (cki.Key == ConsoleKey.Q)
+            {
+                menu.SpawnMenu();
+                break;
+            }
+        }
+    }
+
+    private void Lose()
+    {
+        menu.Lose(score, highScore);
+        while (true)
+        {
+            cki = Console.ReadKey(true);
+            if (cki.Key == ConsoleKey.R)
             {
                 restart = true;
                 break;
