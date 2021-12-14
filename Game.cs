@@ -46,6 +46,23 @@ class Game
 
     Menu menu = new Menu();
 
+    private void Bird(char wing, char eye)
+    {
+        bird[0, 0] = ' '; bird[0, 1] = ','; bird[0, 2] = '-'; bird[0, 3] = '.'; bird[0, 4] = ' ';
+        bird[1, 0] = '>'; bird[1, 1] = wing; bird[1, 2] = ' '; bird[1, 3] = eye; bird[1, 4] = '>';
+        bird[2, 0] = ' '; bird[2, 1] = '*'; bird[2, 2] = '%'; bird[2, 3] = '*'; bird[2, 4] = ' ';
+    }
+
+    private void Pipe1()
+    {
+
+    }
+
+    private void Pipe2()
+    {
+
+    }
+
     private void CountDown()
     {
         Console.ForegroundColor = ConsoleColor.Gray;
@@ -99,4 +116,5 @@ class Game
             }
         }
     }
+
 }
