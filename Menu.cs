@@ -91,7 +91,7 @@ class Menu
         Console.WriteLine("    ====================================    ");
     }
 
-    public void Lose(int score, int highScore) 
+    public void Lose(int score, int highScore)
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine();
