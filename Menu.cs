@@ -20,19 +20,23 @@ class Menu
         ConsoleKeyInfo cki;
         cki = Console.ReadKey(true);
 
-        switch (cki.Key)
+        while (true)
         {
-            case ConsoleKey.Spacebar:
+            if (cki.Key == ConsoleKey.Spacebar)
+            {
                 option = MenuOption.Start;
                 break;
-            case ConsoleKey.Escape:
+            }
+            else if (cki.Key == ConsoleKey.Escape)
+            {
                 option = MenuOption.Quit;
                 break;
-            case ConsoleKey.H:
+            }
+            else if (cki.Key == ConsoleKey.H)
+            {
                 option = MenuOption.HighScore;
                 break;
-            default:
-                break;
+            }
         }
         return option;
     }
@@ -72,5 +76,33 @@ class Menu
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (bird[i].Length / 2)) + "}", bird[i]));
         }
         Console.WriteLine();
+    }
+
+    public void Pause()
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine();
+        Console.WriteLine("    ====================================    ");
+        Console.WriteLine("                 GAME PAUSED                ");
+        Console.WriteLine();
+        Console.WriteLine("      Resume game   - press [SpaceBar]      ");
+        Console.WriteLine("      Restart game  - press [R]             ");
+        Console.WriteLine("      Main menu     - press [Q]             ");
+        Console.WriteLine("    ====================================    ");
+    }
+
+    public void Lose(int score, int highScore)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine();
+        Console.WriteLine("    ====================================    ");
+        Console.WriteLine("                  GAME OVER                 ");
+        Console.WriteLine();
+        Console.WriteLine("               Your Score: {0}              ", score);
+        Console.WriteLine("               High Score: {0}              ", highScore);
+        Console.WriteLine();
+        Console.WriteLine("         Restart game   - press [R]          ");
+        Console.WriteLine("         Main menu      - press [Q]          ");
+        Console.WriteLine("    ====================================    ");
     }
 }
