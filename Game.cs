@@ -80,25 +80,25 @@ class Game
             {
                 if (j < extraRender)
                 {
-                    pipeX[i, j] = pipePivotX - (extraRender - 1);
+                    pipeX[i, j] = pipePivotX - (extraRender - j);
                 }
                 else if (j > extraRender)
                 {
-                    pipeX[i, j] = pipePivotX + (extraRender - 1);
+                    pipeX[i, j] = pipePivotX + (j - extraRender);
                 }
                 else if (j == extraRender)
                 {
                     pipeX[i, j] = pipePivotX;
                 }
                 pipeY[i, j] = i;
-                pipe[i, j] = '='; // pipe1 char
+                pipe[i, j] = '1'; // pipe1 char
             }
         }
-        for (int j = splitStart; j < splitLength + splitStart; j++)
+        for (int k = splitStart; k < splitLength + splitStart; k++)
         {
-            for (int k = 0; k < pipeWidth; k++)
+            for (int l = 0; l < pipeWidth; l++)
             {
-                pipe[j, k] = ' ';
+                pipe[k, l] = ' ';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -112,25 +112,25 @@ class Game
             {
                 if (j < extraRender)
                 {
-                    pipeX2[i, j] = pipePivotX2 - (extraRender - 1);
+                    pipeX2[i, j] = pipePivotX2 - (extraRender - j);
                 }
                 else if (j > extraRender)
                 {
-                    pipeX2[i, j] = pipePivotX2 + (extraRender - 1);
+                    pipeX2[i, j] = pipePivotX2 + (j - extraRender);
                 }
                 else if (j == extraRender)
                 {
                     pipeX2[i, j] = pipePivotX2;
                 }
                 pipeY2[i, j] = i;
-                pipe2[i, j] = '='; // pipe2 char
+                pipe2[i, j] = '2'; // pipe2 char
             }
         }
-        for (int j = splitStart2; j < splitLength2 + splitStart2; j++)
+        for (int k = splitStart2; k < splitLength2 + splitStart2; k++)
         {
-            for (int k = 0; k < pipeWidth; k++)
+            for (int l = 0; l < pipeWidth; l++)
             {
-                pipe2[j, k] = ' ';
+                pipe2[k, l] = ' ';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -247,7 +247,7 @@ class Game
                                 }
                                 else if (j == pivotX - 1 && i == pivotY)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                 }
                                 else if (j == pivotX + 2 && i == pivotY)
                                 {
@@ -300,8 +300,9 @@ class Game
                 }
                 Console.WriteLine();
             }
-
+            Console.SetCursorPosition(0, height);
             Console.WriteLine("-------------------------------------------");
+            Console.WriteLine($"Your score: {score}");
         }
     }
 
@@ -361,6 +362,10 @@ class Game
             Logic();
             Render();
             Thread.Sleep(10);
+            if (gameOver || restart)
+            {
+                break;
+            }
         }
     }
 
