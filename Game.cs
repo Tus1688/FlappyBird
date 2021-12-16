@@ -98,8 +98,7 @@ class Game
         {
             for (int l = 0; l < pipeWidth; l++)
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                pipe[k, l] = 'x';
+                pipe[k, l] = ' ';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -131,8 +130,7 @@ class Game
         {
             for (int l = 0; l < pipeWidth; l++)
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                pipe2[k, l] = 'x';
+                pipe2[k, l] = ' ';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -214,7 +212,7 @@ class Game
         splitStart2 = rand.Next(3, height - 11);
         splitLength = splitLength2 = 9;
         pipePivotX = 60;
-        pipePivotX2 = pipePivotX + pipeWidth + 21;
+        pipePivotX2 = pipePivotX + pipeWidth + 22;
         pipeWidth = 15;
         extraRender = pipeWidth / 2;
     }
@@ -226,6 +224,9 @@ class Game
         pivotY = 10;
         Bird('v', 'o');
 
+        Console.WriteLine("================================");
+        Console.WriteLine("supert duper bird");
+        Console.WriteLine("================================");
         for (int i = 6; i < 14; i++)
         {
             for (int j = 0; j < width; j++)
