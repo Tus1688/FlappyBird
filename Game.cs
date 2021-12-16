@@ -55,19 +55,19 @@ class Game
 
         birdX[0, 0] = pivotX - 2; birdY[0, 0] = pivotY - 1;
         birdX[0, 1] = pivotX - 1; birdY[0, 1] = pivotY - 1;
-        birdX[0, 2] = pivotX;     birdY[0, 2] = pivotY - 1;
+        birdX[0, 2] = pivotX; birdY[0, 2] = pivotY - 1;
         birdX[0, 3] = pivotX + 1; birdY[0, 3] = pivotY - 1;
         birdX[0, 4] = pivotX + 2; birdY[0, 4] = pivotY - 1;
 
         birdX[1, 0] = pivotX - 2; birdY[1, 0] = pivotY;
         birdX[1, 1] = pivotX - 1; birdY[1, 1] = pivotY;
-        birdX[1, 2] = pivotX;     birdY[1, 2] = pivotY;
+        birdX[1, 2] = pivotX; birdY[1, 2] = pivotY;
         birdX[1, 3] = pivotX + 1; birdY[1, 3] = pivotY;
         birdX[1, 4] = pivotX + 2; birdY[1, 4] = pivotY;
 
         birdX[2, 0] = pivotX - 2; birdY[2, 0] = pivotY + 1;
         birdX[2, 1] = pivotX - 1; birdY[2, 1] = pivotY + 1;
-        birdX[2, 2] = pivotX;     birdY[2, 2] = pivotY + 1;
+        birdX[2, 2] = pivotX; birdY[2, 2] = pivotY + 1;
         birdX[2, 3] = pivotX + 1; birdY[2, 3] = pivotY + 1;
         birdX[2, 4] = pivotX + 2; birdY[2, 4] = pivotY + 1;
     }
@@ -210,7 +210,7 @@ class Game
 
         splitStart = rand.Next(5, height - 10);
         splitStart2 = rand.Next(3, height - 13);
-        splitLength = splitLength = 9;
+        splitLength = splitLength2 = 9;
         pipePivotX = 60;
         pipePivotX2 = pipePivotX + pipeWidth + 21;
         pipeWidth = 15;
@@ -219,13 +219,13 @@ class Game
 
     private void Render()
     {
-        if(!gameOver)
+        if (!gameOver)
         {
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Green;
-            for(int i = 0; i < height; i++)
+            for (int i = 0; i < height; i++)
             {
-                for(int j = 0; j < width; j++)
+                for (int j = 0; j < width; j++)
                 {
                     isPrinted = false;
                     for (int k = 0; k < 3; k++)
@@ -239,7 +239,7 @@ class Game
                                     if (bird[k, l] == 'o')   // bird eye alive? color white : color red;
                                     {
                                         Console.ForegroundColor = ConsoleColor.White;
-                                    } 
+                                    }
                                     else
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
@@ -253,7 +253,7 @@ class Game
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
                                 }
-                                else 
+                                else
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                 }
@@ -303,6 +303,20 @@ class Game
             Console.SetCursorPosition(0, height);
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine($"Your score: {score}");
+        }
+    }
+    private void GameInput()
+    {
+        while (Console.KeyAvailable)
+        {
+            if (!gameOver)
+            {
+                cki = Console.ReadKey(true);
+            }
+            if (cki.Key == ConsoleKey.Spacebar)
+            {
+                isFlying = true;
+            }
         }
     }
 
@@ -359,6 +373,7 @@ class Game
         Console.Clear();
         while (true)
         {
+            GameInput();
             Logic();
             Render();
             Thread.Sleep(10);
