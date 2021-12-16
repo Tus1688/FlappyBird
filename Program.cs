@@ -7,7 +7,7 @@ class Program
         Menu menu = new Menu();
         Game game = new Game();
 
-        game.LoadGame();
+        game.InitialLoad();
         /*
          *while (menu.option != MenuOption.Quit)
          *{

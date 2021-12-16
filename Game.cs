@@ -98,7 +98,8 @@ class Game
         {
             for (int l = 0; l < pipeWidth; l++)
             {
-                pipe[k, l] = ' ';
+                Console.ForegroundColor = ConsoleColor.Gray;
+                pipe[k, l] = 'x';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -130,7 +131,8 @@ class Game
         {
             for (int l = 0; l < pipeWidth; l++)
             {
-                pipe2[k, l] = ' ';
+                Console.ForegroundColor = ConsoleColor.Gray;
+                pipe2[k, l] = 'x';
             }
         }
         Thread.Sleep(30); // most important thing
@@ -209,12 +211,59 @@ class Game
         pivotY = height / 2;
 
         splitStart = rand.Next(5, height - 10);
-        splitStart2 = rand.Next(3, height - 13);
+        splitStart2 = rand.Next(3, height - 11);
         splitLength = splitLength2 = 9;
         pipePivotX = 60;
         pipePivotX2 = pipePivotX + pipeWidth + 21;
         pipeWidth = 15;
         extraRender = pipeWidth / 2;
+    }
+
+    private void InitialRender()
+    {
+        Console.Clear();
+        pivotX = 30;
+        pivotY = 10;
+        Bird('v', 'o');
+
+        for (int i = 6; i < 14; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                isPrinted = false;
+                for (int k = 0; k < 3; k++)
+                {
+                    for (int l = 0; l < 5; l++)
+                    {
+                        if (j == birdX[k, l] && i == birdY[k, l])
+                        {
+                            if (j == pivotX + 1 && i == pivotY)
+                            {
+                                Console.Write(bird[k, l]);
+                            }
+                            else if (j == pivotX - 1 && i == pivotY)
+                            {
+                                Console.Write(bird[k, l]);
+                            }
+                            else if (j == pivotX + 2 && i == pivotY)
+                            {
+                                Console.Write(bird[k, l]);
+                            }
+                            else
+                            {
+                                Console.Write(bird[k, l]);
+                            }
+                            isPrinted = true;
+                        }
+                    }
+                }
+                if (!isPrinted)
+                {
+                    Console.Write(" ");
+                }
+            }
+        }
+        Console.WriteLine();
     }
 
     private void Render()
@@ -355,7 +404,7 @@ class Game
         if (pipePivotX == -extraRender)
         {
             pipePivotX = width + extraRender;
-            splitStart = rand.Next(3, height - splitLength - 3);
+            splitStart = rand.Next(3, height - splitLength - 5);
         }
         if (pipePivotX2 == -extraRender)
         {
@@ -389,5 +438,11 @@ class Game
         CountDown();
         Setup();
         UpdateState();
+    }
+
+    public void InitialLoad()
+    {
+        Setup();
+        LoadGame();
     }
 }
