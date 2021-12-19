@@ -138,13 +138,17 @@ class Game
 
     private void CountDown()
     {
-        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.CursorVisible = false;
         for (int i = 3; i >= 1; i--)
         {
+            Console.SetCursorPosition(width / 2 - 8, height / 2 + 5);
             Console.Write($"Game will start in {i}");
             Thread.Sleep(1000);
         }
         Console.ForegroundColor = ConsoleColor.Green;
+        Console.BackgroundColor = ConsoleColor.Black;
     }
 
     private void Pause()
@@ -155,8 +159,9 @@ class Game
             cki = Console.ReadKey(true);
             if (cki.Key == ConsoleKey.Spacebar)
             {
-                // render game again
+                Render();
                 CountDown();
+                break;
             }
             else if (cki.Key == ConsoleKey.R)
             {
@@ -351,10 +356,11 @@ class Game
                 Console.WriteLine();
             }
             Console.SetCursorPosition(0, height);
-            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------");
             Console.WriteLine($"Your score: {score}");
         }
     }
+
     private void GameInput()
     {
         while (Console.KeyAvailable)
@@ -366,6 +372,10 @@ class Game
             if (cki.Key == ConsoleKey.Spacebar)
             {
                 isFlying = true;
+            }
+            if (cki.Key == ConsoleKey.Escape)
+            {
+                Pause();
             }
         }
     }
@@ -418,6 +428,42 @@ class Game
         Bird(wing, 'o');
     }
 
+    private void CheckDeath()
+    {
+        void DeathHelper()
+        {
+            Bird(wing, 'x');  // make eye be more realistic
+            Render();
+            gameOver = true;
+        }
+
+        if (pivotY + 1 <= 2 || pivotY + 1 >= height - 1)
+        {
+            DeathHelper();
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (birdY[i, j] <= pipeY[splitStart, 0] - 1 || birdY[i, j] >= pipeY[splitStart + splitLength, 0])
+                {
+                    if (birdX[i, j] >= pipePivotX - extraRender && birdX[i, j] <= pipePivotX + extraRender - 1)
+                    {
+                        DeathHelper();
+                    }
+                }
+                if (birdY[i, j] <= pipeY2[splitStart2, 0] - 1 || birdY[i, j] >= pipeY2[splitStart2 + splitLength2, 0])
+                {
+                    if (birdX[i, j] >= pipePivotX2 - extraRender && birdX[i, j] <= pipePivotX2 + extraRender + 1)
+                    {
+                        DeathHelper();
+                    }
+                }
+            }
+        }
+    }
+
     private void UpdateState()
     {
         Console.Clear();
@@ -426,10 +472,15 @@ class Game
             GameInput();
             Logic();
             Render();
-            Thread.Sleep(10);
+            CheckDeath();
             if (gameOver || restart)
             {
                 break;
+            }
+            Thread.Sleep(10);
+            if (gameOver)
+            {
+                Lose();
             }
         }
     }

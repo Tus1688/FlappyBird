@@ -80,20 +80,22 @@ class Menu
 
     public void Pause()
     {
+        Console.CursorTop = 10;
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine();
-        Console.WriteLine("    ====================================    ");
-        Console.WriteLine("                 GAME PAUSED                ");
-        Console.WriteLine();
-        Console.WriteLine("      Resume game   - press [SpaceBar]      ");
-        Console.WriteLine("      Restart game  - press [R]             ");
-        Console.WriteLine("      Main menu     - press [Q]             ");
-        Console.WriteLine("    ====================================    ");
+        Console.WriteLine("        ============================================        ");
+        Console.WriteLine("                         GAME PAUSED                        ");
+        Console.WriteLine("                                                            ");
+        Console.WriteLine("              Resume game   - press [SpaceBar]              ");
+        Console.WriteLine("              Restart game  - press [R]                     ");
+        Console.WriteLine("              Main menu     - press [Q]                     ");
+        Console.WriteLine("        ============================================        ");
     }
 
     public void Lose(int score, int highScore)
     {
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.CursorTop = 10;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine();
         Console.WriteLine("    ====================================    ");
         Console.WriteLine("                  GAME OVER                 ");
@@ -104,5 +106,6 @@ class Menu
         Console.WriteLine("         Restart game   - press [R]          ");
         Console.WriteLine("         Main menu      - press [Q]          ");
         Console.WriteLine("    ====================================    ");
+        Console.ForegroundColor = ConsoleColor.Green;
     }
 }
