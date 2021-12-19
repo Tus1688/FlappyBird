@@ -351,7 +351,7 @@ class Game
                 Console.WriteLine();
             }
             Console.SetCursorPosition(0, height);
-            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------");
             Console.WriteLine($"Your score: {score}");
         }
     }
@@ -418,6 +418,41 @@ class Game
         Bird(wing, 'o');
     }
 
+    private void CheckDeath()
+    {
+        if (pivotY + 1 <= 2 || pivotY + 1 >= height - 1)
+        {
+            Bird(wing, 'x');  // make eye be more realistic
+            Render();
+            gameOver = true;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (bird[i, j] <= pipeY[splitStart, 0] - 1 || birdY[i ,j] >= pipeY[splitStart + splitLength, 0])
+                {
+                    if (birdX[i, j] >= pipePivotX - extraRender && birdX[i, j] <= pipePivotX + extraRender - 1)
+                    {
+                        Bird(wing, 'x');  // make eye be more realistic
+                        Render();
+                        gameOver = true;
+                    }
+                }
+                if (birdY[i, j] <= pipeY2[splitStart2, 0] - 1 || birdY[i, j] >= pipeY2[splitStart2 + splitLength2, 0])
+                {
+                    if (birdX[i, j] >= pipePivotX2 - extraRender && birdX[i, j] <= pipePivotX2 + extraRender +1)
+                    {
+                        Bird(wing, 'x');  // make eye be more realistic
+                        Render();
+                        gameOver = true;
+                    }
+                }
+            }
+        }
+    }
+
     private void UpdateState()
     {
         Console.Clear();
@@ -426,6 +461,7 @@ class Game
             GameInput();
             Logic();
             Render();
+            CheckDeath();
             Thread.Sleep(10);
             if (gameOver || restart)
             {
