@@ -420,33 +420,34 @@ class Game
 
     private void CheckDeath()
     {
-        if (pivotY + 1 <= 2 || pivotY + 1 >= height - 1)
+        void DeathHelper()
         {
             Bird(wing, 'x');  // make eye be more realistic
             Render();
             gameOver = true;
         }
 
+        if (pivotY + 1 <= 2 || pivotY + 1 >= height - 1)
+        {
+            DeathHelper();
+        }
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 5; j++)
             {
-                if (bird[i, j] <= pipeY[splitStart, 0] - 1 || birdY[i ,j] >= pipeY[splitStart + splitLength, 0])
+                if (birdY[i, j] <= pipeY[splitStart, 0] - 1 || birdY[i, j] >= pipeY[splitStart + splitLength, 0])
                 {
                     if (birdX[i, j] >= pipePivotX - extraRender && birdX[i, j] <= pipePivotX + extraRender - 1)
                     {
-                        Bird(wing, 'x');  // make eye be more realistic
-                        Render();
-                        gameOver = true;
+                        DeathHelper();
                     }
                 }
                 if (birdY[i, j] <= pipeY2[splitStart2, 0] - 1 || birdY[i, j] >= pipeY2[splitStart2 + splitLength2, 0])
                 {
-                    if (birdX[i, j] >= pipePivotX2 - extraRender && birdX[i, j] <= pipePivotX2 + extraRender +1)
+                    if (birdX[i, j] >= pipePivotX2 - extraRender && birdX[i, j] <= pipePivotX2 + extraRender + 1)
                     {
-                        Bird(wing, 'x');  // make eye be more realistic
-                        Render();
-                        gameOver = true;
+                        DeathHelper();
                     }
                 }
             }
