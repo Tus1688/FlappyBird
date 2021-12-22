@@ -138,8 +138,8 @@ class Game
 
     private void CountDown()
     {
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.BackgroundColor = ConsoleColor.White;
         Console.CursorVisible = false;
         for (int i = 3; i >= 1; i--)
         {
@@ -302,7 +302,7 @@ class Game
                                 }
                                 else if (j == pivotX - 1 && i == pivotY)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 }
                                 else if (j == pivotX + 2 && i == pivotY)
                                 {
@@ -473,15 +473,15 @@ class Game
             Logic();
             Render();
             CheckDeath();
+            if (gameOver)
+            {
+                Lose();
+            }
             if (gameOver || restart)
             {
                 break;
             }
             Thread.Sleep(10);
-            if (gameOver)
-            {
-                Lose();
-            }
         }
     }
 
@@ -496,5 +496,9 @@ class Game
     {
         Setup();
         LoadGame();
+        while (true)
+        {
+            LoadGame();
+        }
     }
 }
