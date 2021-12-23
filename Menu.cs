@@ -4,7 +4,6 @@ enum MenuOption
 {
     Start,
     Quit,
-    HighScore,
 }
 class Menu
 {
@@ -29,12 +28,7 @@ class Menu
             }
             else if (cki.Key == ConsoleKey.Escape)
             {
-                option = MenuOption.Quit;
-                break;
-            }
-            else if (cki.Key == ConsoleKey.H)
-            {
-                option = MenuOption.HighScore;
+                Environment.Exit(0);
                 break;
             }
         }
@@ -44,12 +38,16 @@ class Menu
     private void radio()
     {
         string start = String.Format("{0,-2} {1,-20}", " ", "Press [SpaceBar] to start game");
-        string stop = String.Format("{0,-2} {1,-20}", " ", "Press [Escape] to start game  ");
-        string highscore = String.Format("{0,-2} {1,-20}", " ", "Press [H] to show highscore   ");
+        string stop = String.Format("{0,-2} {1,-20}", " ", "Press [Escape] to quit the game");
 
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (start.Length / 2)) + "}", start));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (stop.Length / 2)) + "}", stop));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (highscore.Length / 2)) + "}", highscore));
+        /*
+         *Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (start.Length / 2)) + "}", start));
+         *Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (stop.Length / 2)) + "}", stop));
+         *Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (highscore.Length / 2)) + "}", highscore));
+         */
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("              " + start);
+        Console.WriteLine("              " + stop);
     }
 
     private void PrintFlappyBird()
@@ -69,11 +67,12 @@ class Menu
             "               ...kXXXXXXK.........    ",
             "                  ........             ",
         };
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine();
         for (int i = 0; i < bird.Length; i++)
         {
             System.Threading.Thread.Sleep(200);
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (bird[i].Length / 2)) + "}", bird[i]));
+            Console.WriteLine("          " + bird[i]);
         }
         Console.WriteLine();
     }
@@ -97,15 +96,15 @@ class Menu
         Console.CursorTop = 10;
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine();
-        Console.WriteLine("    ====================================    ");
-        Console.WriteLine("                  GAME OVER                 ");
-        Console.WriteLine();
-        Console.WriteLine("               Your Score: {0}              ", score);
-        Console.WriteLine("               High Score: {0}              ", highScore);
-        Console.WriteLine();
-        Console.WriteLine("         Restart game   - press [R]          ");
-        Console.WriteLine("         Main menu      - press [Q]          ");
-        Console.WriteLine("    ====================================    ");
+        Console.WriteLine("        ============================================        ");
+        Console.WriteLine("                          GAME OVER                         ");
+        Console.WriteLine("                                                            ");
+        Console.WriteLine("                       Your Score: {0}                      ", score);
+        Console.WriteLine("                       High Score: {0}                      ", highScore);
+        Console.WriteLine("                                                            ");
+        Console.WriteLine("                 Restart game   - press [R]                 ");
+        Console.WriteLine("                 Main menu      - press [Q]                 ");
+        Console.WriteLine("        ============================================        ");
         Console.ForegroundColor = ConsoleColor.Green;
     }
 }

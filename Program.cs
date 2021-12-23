@@ -7,16 +7,17 @@ class Program
         Menu menu = new Menu();
         Game game = new Game();
 
-        game.InitialLoad();
-        /*
-         *while (menu.option != MenuOption.Quit)
-         *{
-         *    menu.SpawnMenu();
-         *    if (menu.option == MenuOption.Start)
-         *    {
-         *        game.LoadGame();
-         *    }
-         *}
-         */
+        while (menu.option != MenuOption.Quit)
+        {
+            menu.SpawnMenu();
+            if (menu.option == MenuOption.Start)
+            {
+                game.InitialLoad();
+            }
+            else if (menu.option == MenuOption.Quit)
+            {
+                Environment.Exit(0);
+            }
+        }
     }
 }
