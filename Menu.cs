@@ -87,7 +87,6 @@ class Menu
         Console.WriteLine("                                                            ");
         Console.WriteLine("              Resume game   - press [SpaceBar]              ");
         Console.WriteLine("              Restart game  - press [R]                     ");
-        Console.WriteLine("              Main menu     - press [Q]                     ");
         Console.WriteLine("        ============================================        ");
     }
 
