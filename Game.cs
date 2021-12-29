@@ -91,7 +91,7 @@ class Game
                     pipeX[i, j] = pipePivotX;
                 }
                 pipeY[i, j] = i;
-                pipe[i, j] = '1'; // pipe1 char
+                pipe[i, j] = '='; // pipe1 char
             }
         }
         for (int k = splitStart; k < splitLength + splitStart; k++)
@@ -123,7 +123,7 @@ class Game
                     pipeX2[i, j] = pipePivotX2;
                 }
                 pipeY2[i, j] = i;
-                pipe2[i, j] = '2'; // pipe2 char
+                pipe2[i, j] = '='; // pipe2 char
             }
         }
         for (int k = splitStart2; k < splitLength2 + splitStart2; k++)
@@ -166,11 +166,6 @@ class Game
             else if (cki.Key == ConsoleKey.R)
             {
                 restart = true;
-                break;
-            }
-            else if (cki.Key == ConsoleKey.Q)
-            {
-                menu.SpawnMenu();
                 break;
             }
         }
@@ -220,56 +215,6 @@ class Game
         pipePivotX2 = pipePivotX + pipeWidth + 22;
         pipeWidth = 15;
         extraRender = pipeWidth / 2;
-    }
-
-    private void InitialRender()
-    {
-        Console.Clear();
-        pivotX = 30;
-        pivotY = 10;
-        Bird('v', 'o');
-
-        Console.WriteLine("================================");
-        Console.WriteLine("supert duper bird");
-        Console.WriteLine("================================");
-        for (int i = 6; i < 14; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                isPrinted = false;
-                for (int k = 0; k < 3; k++)
-                {
-                    for (int l = 0; l < 5; l++)
-                    {
-                        if (j == birdX[k, l] && i == birdY[k, l])
-                        {
-                            if (j == pivotX + 1 && i == pivotY)
-                            {
-                                Console.Write(bird[k, l]);
-                            }
-                            else if (j == pivotX - 1 && i == pivotY)
-                            {
-                                Console.Write(bird[k, l]);
-                            }
-                            else if (j == pivotX + 2 && i == pivotY)
-                            {
-                                Console.Write(bird[k, l]);
-                            }
-                            else
-                            {
-                                Console.Write(bird[k, l]);
-                            }
-                            isPrinted = true;
-                        }
-                    }
-                }
-                if (!isPrinted)
-                {
-                    Console.Write(" ");
-                }
-            }
-        }
-        Console.WriteLine();
     }
 
     private void Render()
@@ -481,7 +426,6 @@ class Game
             {
                 break;
             }
-            Thread.Sleep(10);
         }
     }
 
