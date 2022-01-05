@@ -101,7 +101,6 @@ class Game
                 pipe[k, l] = ' ';
             }
         }
-        Thread.Sleep(30); // most important thing
     }
 
     private void Pipe2()
@@ -133,7 +132,6 @@ class Game
                 pipe2[k, l] = ' ';
             }
         }
-        Thread.Sleep(30); // most important thing
     }
 
     private void CountDown()
@@ -426,6 +424,7 @@ class Game
             {
                 break;
             }
+            Thread.Sleep(30); // most important thing
         }
     }
 
