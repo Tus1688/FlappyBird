@@ -201,7 +201,7 @@ class Game
 
         gameOver = false;
         restart = false;
-        isFlying = false;
+        isFlying = true;
 
         pivotX = 25;
         pivotY = height / 2;
@@ -424,21 +424,22 @@ class Game
             {
                 break;
             }
-            Thread.Sleep(30); // most important thing
+            Thread.Sleep(80); // most important thing
         }
     }
 
     public void LoadGame()
     {
-        CountDown();
         Setup();
+        Logic();
+        Render();
+        CountDown();
         UpdateState();
     }
 
     public void InitialLoad()
     {
         Setup();
-        LoadGame();
         while (true)
         {
             LoadGame();
