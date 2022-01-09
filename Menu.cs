@@ -4,33 +4,30 @@ enum MenuOption
 {
     Start,
     Quit,
+    dummy
 }
 class Menu
 {
     public Menu() { } // make Menu callable from Program.cs
-    public MenuOption option; // type of option is MenuOption (line 3)
+    public MenuOption option = MenuOption.dummy; // type of option is MenuOption (line 3)
 
     public MenuOption SpawnMenu()
     {
         Console.Clear();
+        Console.BackgroundColor = ConsoleColor.Black;
         PrintFlappyBird();
         radio();
 
         ConsoleKeyInfo cki;
         cki = Console.ReadKey(true);
 
-        while (true)
+        if (cki.Key == ConsoleKey.Spacebar)
         {
-            if (cki.Key == ConsoleKey.Spacebar)
-            {
-                option = MenuOption.Start;
-                break;
-            }
-            else if (cki.Key == ConsoleKey.Escape)
-            {
-                Environment.Exit(0);
-                break;
-            }
+            option = MenuOption.Start;
+        }
+        else if (cki.Key == ConsoleKey.Escape)
+        {
+            Environment.Exit(0);
         }
         return option;
     }
